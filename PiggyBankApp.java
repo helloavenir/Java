@@ -6,6 +6,7 @@ class PiggyBankApp {
 		PiggyBank pb1 = new PiggyBank();
 		PiggyBank pb2 = new PiggyBank(15000);
 		
+		System.out.println("===빈 돼지저금통===");
 	    pb1.balance();
 	    pb1.deposit(10000);
 	    pb1.balance();
@@ -13,6 +14,7 @@ class PiggyBankApp {
 	    pb1.balance();
 	    
 	    System.out.println("");
+	    System.out.println("==15000원 든 돼지저금통==");
 	    pb2.balance();
 	    pb2.deposit(10000);
 	    pb2.balance();
