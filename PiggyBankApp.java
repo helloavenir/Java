@@ -1,25 +1,28 @@
-package piggyBank;
+package view;
 
-class PiggyBankApp {
+import model.PiggyBank;
+
+public class PiggyBankApp {
 
 	public static void main(String[] args) {
+		//»ı¼ºÀÚ°¡ Å¬·¡½º¿¡ ÇÏ³ª¶óµµ ÀÖÀ¸¸é ±âº»»ı¼ºÀÚ »ı¼ºÀº »ı±âÁö ¾ÊÀ½
 		PiggyBank pb1 = new PiggyBank();
-		PiggyBank pb2 = new PiggyBank(15000);
+		//°´Ã¼ ÃÊ±âÈ­¸¦ µû·Î ¾ÈÇØÁÖ¸é, ÇÊµå´Â ¸ğµÎ 0°ªÀ» °®´Â´Ù.
+		pb1.showMoney();
+		pb1.deposit(10000);
+		pb1.showMoney();
+		pb1.withdraw(1000);
+		pb1.showMoney();
 		
-		System.out.println("===ë¹ˆ ë¼ì§€ì €ê¸ˆí†µ===");
-	    pb1.balance();
-	    pb1.deposit(10000);
-	    pb1.balance();
-	    pb1.withdraw(1000);
-	    pb1.balance();
-	    
-	    System.out.println("");
-	    System.out.println("==15000ì› ë“  ë¼ì§€ì €ê¸ˆí†µ==");
-	    pb2.balance();
-	    pb2.deposit(10000);
-	    pb2.balance();
-	    pb2.withdraw(1000);
-	    pb2.balance();   
+		pb1.withdraw(10000);
+		
+		
+		PiggyBank pb2 = new PiggyBank(10000);
+		
+		pb2.showMoney();
+		
+		// TODO Auto-generated method stub
+
 	}
 
 }

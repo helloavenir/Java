@@ -1,28 +1,30 @@
-package piggyBank;
+package model;
 
-class PiggyBank {
-	private int money;
-
-	
-	PiggyBank(){
-		money = 0;
+public class PiggyBank {
+	//ÇÊµå: Àú±İÅë ±İ¾× ÀúÀå
+	int money;
+	//ºó µÅÁöÀú±İÅë »ı¼º
+	public PiggyBank() {
+		
 	}
 	
-	PiggyBank(int m) {
-		money = m;
+	//»ç¿ëÀÚ°¡ ÀÔ±İÇÑ ±İ¾×ÀÌ µé¾îÀÖ´Â µÅÁöÀú±İÅë »ı¼º
+	public PiggyBank(int money) {
+		this.money = money;
 	}
 	
-	public void deposit(int m) {
-		money += m;	
-		System.out.println(m + "ì› ì˜ˆê¸ˆ");
+	//¿¹±İ
+	public void deposit(int money) {
+		this.money += money;		
 	}
-	
-	public void withdraw(int m) {
-		money -= m;	
-		System.out.println(m + "ì› ì¸ì¶œ");
+	//ÀÎÃâ
+	public void withdraw(int money) {
+		if(this.money >= money)
+			this.money -= money;
+		else System.out.println("ÀÜ¾×Àº " + this.money + "¿ø ÀÔ´Ï´Ù.");
 	}
-	
-	public void balance() {
-		System.out.println(money + "ì› ë‚¨ìŒ");		
+	//ÀÜ°í Ãâ·Â
+	public void showMoney() {
+		System.out.println("³²Àº µ·: "+ money + "¿ø ÀÔ´Ï´Ù.");
 	}
 }
