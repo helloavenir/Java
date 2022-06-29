@@ -1,4 +1,4 @@
-package lab05;
+package basicPac;
 
 public class Point {
 	private int x, y;
