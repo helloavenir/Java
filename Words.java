@@ -1,32 +1,89 @@
-package game;
+package gameProject;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
-//words.txt ÆÄÀÏÀ» ÀĞ°í º¤ÅÍ¿¡ ÀúÀåÇÏ°í º¤ÅÍ·ÎºÎÅÍ ·£´ıÇÏ°Ô ´Ü¾î¸¦ ÃßÃâÇÏ´Â Å¬·¡½º
+//words.txt íŒŒì¼ì„ ì½ê³  ë²¡í„°ì— ì €ì¥í•˜ê³  ë²¡í„°ë¡œë¶€í„° ëœë¤í•˜ê²Œ ë‹¨ì–´ë¥¼ ì¶”ì¶œí•˜ëŠ” í´ë˜ìŠ¤
 class Words {
+	static final int GAME_LEVEL_EASY = 0;
+	static final int GAME_LEVEL_NORMAL = 1;
+	static final int GAME_LEVEL_HARD = 2;
+	
 	Vector<String> wordVector = new Vector<String>();
-
-	public Words(String fileName) {
+	
+	//íŒŒì¼ëª…, ë ˆë²¨ ë°›ì•„ Words ìƒì„±ì
+	public Words(String fileName, int level){	//level: easy(0), normal(1), hard(2)
+		String word;
+		int numChar;
+		
 		try {
 			Scanner scanner = new Scanner(new FileReader(fileName));
-			while(scanner.hasNext()) { // ÆÄÀÏ ³¡±îÁö ÀĞÀ½
-				String word = scanner.nextLine(); // ÇÑ ¶óÀÎÀ» ÀĞ°í '\n'À» ¹ö¸° ³ª¸ÓÁö ¹®ÀÚ¿­¸¸ ¸®ÅÏ
-				wordVector.add(word); // ¹®ÀÚ¿­À» º¤ÅÍ¿¡ ÀúÀå
+			if(level == GAME_LEVEL_HARD) {//hard
+				while(scanner.hasNext()) { // íŒŒì¼ ëê¹Œì§€ ì½ìŒ
+					word = scanner.nextLine(); // í•œ ë¼ì¸ì„ ì½ê³  '\n'ì„ ë²„ë¦° ë‚˜ë¨¸ì§€ ë¬¸ìì—´ë§Œ ë¦¬í„´
+					numChar = getNumChar(word);
+					// ë¬¸ìê¸¸ì´ê°€ 7ì´ˆê³¼ & ì„œë¡œ ë‹¤ë¥¸ ë¬¸ìê°€ 5ê°œ ì´ìƒ
+					if((word.length()>7 &&  numChar>5) || (word.length()<5 && numChar>4))
+						wordVector.add(word); // ë¬¸ìì—´ì„ ë²¡í„°ì— ì €ì¥	
+				}
+			}
+			else if (level == GAME_LEVEL_NORMAL) {//normal
+				while(scanner.hasNext()) { 
+					word = scanner.nextLine(); 
+					numChar = getNumChar(word);
+					// ë¬¸ìê¸¸ì´ê°€ 7 ë¯¸ë§Œ & ì„œë¡œ ë‹¤ë¥¸ ë¬¸ì 3ê°œ ì´ˆê³¼
+					if((word.length()<7 && numChar>3) || word.length()>7)
+						wordVector.add(word); 					
+				}				
+			}
+			else if(level == GAME_LEVEL_EASY) {//easy
+				while(scanner.hasNext()) { 
+					word = scanner.nextLine();
+					numChar = getNumChar(word);
+					// ë¬¸ìê¸¸ì´ 5 ì´ìƒ & ì„œë¡œ ë‹¤ë¥¸ ë¬¸ì 4 ë¯¸ë§Œ
+					if((numChar<4 && word.length()>5) )
+						wordVector.add(word); 				
+				}
 			}
 			scanner.close();
 		}
+	
 		catch(FileNotFoundException e) {
 			System.out.println("file not found error");
 			System.exit(0);
 		}
-	}
 	
+	}
+
+	//ë¬¸ìì—´ ì¤‘ ì„œë¡œ ë‹¤ë¥¸ ë¬¸ìê°€ ëª‡ê°œì¸ì§€ ë¦¬í„´ ë©”ì†Œë“œ
+	private int getNumChar(String word) {
+		ArrayList <Integer> aIndexChar = new ArrayList<Integer>();
+		
+		aIndexChar.add(word.codePointAt(0));
+		
+		for(int i=1;i<word.length();i++) {			
+			int c =word.codePointAt(i);			
+			boolean bBreak = false;
+			int j=0;
+			while(bBreak == false && j<aIndexChar.size()) {
+				if(aIndexChar.get(j) == c ) {						
+					bBreak = true;					
+				}
+				j++;
+			}	
+			if(bBreak == false)
+				aIndexChar.add(c);
+		}		
+		return aIndexChar.size();		
+	}
+	// ì„ì˜ ë¬¸ì ì¶”ì¶œ ë©”ì†Œë“œ
 	public String getRandomWord() {
-		final int WORDMAX = wordVector.size(); // ÃÑ ´Ü¾îÀÇ °³¼ö
+		final int WORDMAX = wordVector.size(); // ì´ ë‹¨ì–´ì˜ ê°œìˆ˜
 		int index = (int)(Math.random()*WORDMAX);
 		return wordVector.get(index);
 	}
+	
 }

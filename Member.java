@@ -1,43 +1,42 @@
-package practice;
+package gameProject;
 
 public class Member {
-	private String name=null;
-	private String tel=null;
-	private String email=null;
+	private String sID;
+	private String sPW;
+	private int iLevel;
+	private int iTotalScore;
 	
-	public Member(String name, String tel, String email) {
-		this.name = name;
-		this.tel = tel;
-		this.email = email;
+	public Member(String sID, String sPW, int iLevel, int iTotalScore) {	
+		this.sID = sID;
+		this.sPW = sPW;
+		this.iLevel = iLevel;
+		this.iTotalScore = iTotalScore;
 	}
-
-	public String getTel() {
-		return tel;
+	String getsID() {
+		return sID;
+	}
+	String getsPW() {
+		return sPW;
 	}
 	
-
-	public String getName() {
-		return name;
+	int getiLevel() {
+		return iLevel;
 	}
-
-	public String getEmail() {
-		return email;
+	int getiTotalScore() {
+		return iTotalScore;
 	}
-
+	
+	void setiLevel(int iLevel) {
+		this.iLevel = iLevel;
+	}
+	void setiTotalScore(int iTotalScore) {
+		this.iTotalScore = iTotalScore;
+	}
 	@Override
-	public boolean equals(Object obj) {
-//		Member를 obj로 형변한해 줌, 객체비교는 개발자가 정의해줘야 함.
-		Member temp = (Member)obj;		
-		return this.name.equals(temp.name);
+	public String toString() {
+		
+		return sID + "," + sPW + "," + iLevel + "," + iTotalScore;
 	}
-
-	@Override
-	public String toString() {		
-		return name + "       " + tel + "      " + email;
-	}
-	
-	
-
 	
 	
 	
